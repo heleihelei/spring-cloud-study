@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.channelsoft.study.cloud.butelmanageservice.dao.SourceDao">
+  
+  	<select id="queryAll" resultType="Source">
+  		select source, source_desc,can_apply_num,count(butel_num) apply_num from 
+  			(select s.source, s.source_desc ,s.can_apply_num,b.butel_num from source s left join butel_num b on s.source = b.source) a 
+  			group by source
+  	</select>
+
+	<select id="query" resultType="Source">
+		select s.source,s.source_desc, s.can_apply_num,t.apply_num from source s left join
+		(select count(butel_num) apply_num, source from butel_num where source = #{source}) t
+		on s.source = t.source where s.source=#{source}
+	</select>
+
+  	<insert id="insert" parameterType="Source">
+  		insert into source(source, source_desc,can_apply_num) values (#{source},#{sourceDesc},#{canApplyNum})
+  	</insert>
+  	
+  	<update id="update" parameterType="Source">
+  		update source set source_desc=#{sourceDesc}, can_apply_num=#{canApplyNum} where source = #{source}
+  	</update>
+  	
+  	<select id="getBy" resultType="Source">
+  		select * from source where source = #{source}
+  	</select>
+  
+  </mapper>

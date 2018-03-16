@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: butel-service-cunsumer-ribbon-hytrix
+server:
+  port: 8084
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+      prefer-ip-address: true

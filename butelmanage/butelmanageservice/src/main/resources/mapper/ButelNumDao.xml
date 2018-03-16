@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.channelsoft.study.cloud.butelmanageservice.dao.ButelNumDao">
+  
+  		<!-- 为Dao接口方法提供sql语句配置 -->
+  		<!-- id的方法名 -->
+  		<insert id="insertButelNum" parameterType="ButelNum">
+  			<!-- 具体是sql语句 -->
+  			insert ignore
+  				butel_num(butel_num, uid, used, appkey,used_time)
+  			values(#{butelNum},#{uid},#{used},#{appkey},#{usedTime})
+  		</insert>
+  		
+  		<select id="queryByNum" resultType="ButelNum" parameterType="string">
+  			select * from butel_num where butel_num = #{butelNum}
+  		</select>
+  		
+  		<select id="queryAll" resultType="ButelNum">
+  			select * from butel_num
+  		</select>
+  		
+  		<!-- 查询条件的片段 -->
+  		<sql id="queryWhere"> 
+  			<if test="butelNum.butelNum!=null and butelNum.butelNum!=''">
+  				and butel_num like '%${butelNum.butelNum}%' 
+  			</if>
+  			<if test="butelNum.appkey!=null and butelNum.appkey!=''">
+  				and appkey like '%${butelNum.appkey}%'  
+  			</if>
+  			<if test="butelNum.used!=-1">
+  				and used = #{butelNum.used} 
+  			</if>
+  			<if test="butelNum.source!=null and butelNum.source!=''">
+  				and source like CONCAT('%','${butelNum.source}','%' )  
+  			</if>
+  		</sql>
+  		
+  		<select id="query" resultType="ButelNum">
+  			select * from butel_num where 1=1   
+  			<include refid="queryWhere"></include>
+  			<if test="sortField!=null and sortField!=''">
+  				order by #{sortField} #{sortOrder} 
+  			</if>
+  				limit #{index} , #{count}
+  		</select>
+  		
+  		<select id="total" resultType="long">
+  			select count(butel_num) from butel_num where 1=1 
+  			<include refid="queryWhere"></include>
+  		</select>
+  		
+  		<select id="getDetail" resultType="ButelDetail">
+  			select count(butel_num) as total, sum(used) as used from butel_num
+  		</select>
+  		
+  		<update id="updateWithIn">
+  			update butel_num set source = #{source},used_time=#{time},used=1 where butel_num in 
+  			
+  				<foreach collection="butels" item="butel" open="(" separator="," close=")">#{butel.butelNum}</foreach>
+  		</update>
+  		
+  		<select id="queryUnused" resultType="ButelNum">
+  			select * from butel_num where used = 0 order by butel_num asc limit 0, #{num};
+  		</select>
+  </mapper>

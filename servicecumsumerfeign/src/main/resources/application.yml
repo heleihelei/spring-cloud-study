@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: butel-service-cunsumer-feign
+server:
+  port: 8085
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+      prefer-ip-address: true
+
+ribbon:
+  ConnectTimeout: 500
+  ReadTimeout: 500
+butel-manage-service:
+  ribbon:
+    OkToRetryOnAllOperations: true
+    MaxAutoRetriesNextServer: 1
+    MaxAutoRetries: 1
+
+feign:
+  hystrix:
+    enabled: true
+
