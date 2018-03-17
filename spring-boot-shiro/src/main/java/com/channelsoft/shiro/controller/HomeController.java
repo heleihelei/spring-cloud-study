@@ -28,6 +28,7 @@ public class HomeController {
 
     @RequestMapping({"/","/index"})
     public String index(){
+        logger.info("HomeController.index()");
         return"/index";
     }
 

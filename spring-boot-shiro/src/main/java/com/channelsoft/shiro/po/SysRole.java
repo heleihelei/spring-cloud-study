@@ -64,4 +64,13 @@ public class SysRole {
         sysRole.setRole("用户权限");
         return sysRole;
     }
+
+    public static SysRole noneRole() {
+        SysRole sysRole = new SysRole();
+        Set<SysPermission> sysPermissions = new HashSet<>();
+        sysRole.setSysPermissionSet(sysPermissions);
+        sysRole.setId(2L);
+        sysRole.setRole("默认权限");
+        return sysRole;
+    }
 }

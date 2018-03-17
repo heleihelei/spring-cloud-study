@@ -30,6 +30,13 @@ public class UserInfoService {
         userInfo.setPassword("admin");
         userInfo.setSysRole(SysRole.userRole());
         map.put("admin", userInfo);
+
+        UserInfo userInfo1 = new UserInfo();
+        userInfo1.setUsername("user");
+        userInfo1.setName("我是默认用户");
+        userInfo1.setPassword("user");
+        userInfo1.setSysRole(SysRole.noneRole());
+        map.put("user", userInfo1);
     }
 
     public UserInfo getUserInfoByName(String username) {
