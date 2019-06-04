@@ -2,7 +2,7 @@ spring:
   application:
     name: butel-service-cunsumer
 server:
-  port: 8082
+  port: 18082
 eureka:
   client:
     serviceUrl:

@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.*;
  * @author cuihc
  */
 //下面的值为需要调用服务的服务名
-@FeignClient(value = "butel-manage-service", fallback = ConsumerServiceFallback.class)
+//@FeignClient(value = "butel-manage-service", fallback = ConsumerServiceFallback.class)
+@FeignClient(value = "butel-manage-service", fallbackFactory = ConsumerServiceFallbackFactory.class)
 public interface ConsumerService {
 
     @RequestMapping(value = "/butel/hello1", method = RequestMethod.GET)

@@ -8,9 +8,9 @@ spring:
   application:
     name: butel-manage-service
   datasource:
-    url: jdbc:mysql://192.168.30.51:3306/butel_manage?useUnicode=true&amp;characterEncoding=UTF-8
-    username: ucds
-    password: ucds
+    url: jdbc:mysql://127.0.0.1:3307/butel_manage?useUnicode=true&amp;characterEncoding=UTF-8
+    username: root
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
 mybatis:
   type-aliases-package: com.channelsoft.study.cloud.butelmanageservice.entity

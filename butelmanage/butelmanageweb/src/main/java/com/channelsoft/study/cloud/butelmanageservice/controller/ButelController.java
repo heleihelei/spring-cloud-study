@@ -31,7 +31,8 @@ public class ButelController {
     @GetMapping("/butel-list")
     public AjaxPo list() {
         try {
-            return this.restTemplate.getForObject("http://butel-manage-service/butel/list", AjaxPo.class);
+//            return this.restTemplate.getForObject("http://butel-manage-service/butel/list", AjaxPo.class);
+            return this.restTemplate.getForObject("http://butel-manage-service/butel/list-ajax", AjaxPo.class);
         } catch (RestClientException e) {
             logger.info("进入RestClientException..." + e.getMessage());
             logger.info(e.getMessage(),e);
